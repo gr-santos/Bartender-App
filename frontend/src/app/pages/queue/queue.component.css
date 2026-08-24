@@ -1,0 +1,70 @@
+.queue-page {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+.refresh {
+  margin-left: 1rem;
+  cursor: pointer;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #fff;
+}
+
+.queue-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.queue-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.queue-item h3 {
+  margin: 0 0 0.25rem;
+}
+
+.status {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.queued {
+  color: #b36b00;
+}
+
+.status.preparing {
+  color: #0057b3;
+}
+
+.status.ready_for_pickup {
+  color: #0a7d2c;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #333;
+  color: #fff;
+}
+
+.error {
+  color: #b00020;
+}
