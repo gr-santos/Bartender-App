@@ -1,0 +1,84 @@
+.home {
+  max-width: 700px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.status-chip {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: #7dffb3;
+  border: 1px solid #39ff14;
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.home h1 {
+  font-size: 2.5rem;
+}
+
+.tagline {
+  color: #8fd6a0;
+  margin-top: 0.75rem;
+}
+
+.options {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: block;
+  width: 260px;
+  padding: 1.5rem;
+  border: 1px solid #39ff14;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  background: #0d1712;
+}
+
+.card:hover {
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.4);
+}
+
+.card-icon {
+  font-size: 2rem;
+}
+
+.card h2 {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.card p {
+  color: #8fd6a0;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.card-cta {
+  display: block;
+  margin-top: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  color: #39ff14;
+}
+
+.card-cyan {
+  border-color: #00f0ff;
+}
+
+.card-cyan .card-cta {
+  color: #00f0ff;
+}
+
+.card-cyan:hover {
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+}

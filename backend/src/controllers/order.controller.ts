@@ -1,51 +1,43 @@
 import { Request, Response } from "express";
-import { OrderModel, OrderStatus } from "../models/order.model";
+import { menu } from "../models/cocktail.model";
+import { Order, OrderStatus, orders } from "../models/order.model";
 
-const VALID_STATUSES: OrderStatus[] = ["queued", "preparing", "ready_for_pickup", "completed"];
-
-/**
- * Handles order-related actions: create (patron places an order),
- * view (bartender's order queue), and edit (bartender updates status).
- */
-export class OrderController {
-  static createOrder(req: Request, res: Response): void {
-    const { cocktailId, patronName } = req.body ?? {};
-
-    const id = Number(cocktailId);
-    if (!id || Number.isNaN(id)) {
-      res.status(400).json({ error: "cocktailId is required" });
-      return;
+export function createOrder(req: Request, res: Response) {
+    if (!req.body.cocktailId) {
+        return res.status(400).json({ error: "cocktailId is required" });
     }
 
-    const order = OrderModel.placeOrder(id, patronName);
-    if (!order) {
-      res.status(404).json({ error: `No cocktail found with id ${id}` });
-      return;
+    const cocktailId = Number(req.body.cocktailId);
+    const patronName = req.body.patronName || "Guest";
+
+    const cocktail = menu.find(c => c.getId() === cocktailId);
+    if (!cocktail) {
+        return res.status(404).json({ error: "Cocktail not found" });
     }
 
-    res.status(201).json({ order });
-  }
+    const order = new Order(orders.length + 1, cocktail, patronName);
+    orders.push(order);
+    res.status(201).json(order);
+}
 
-  static viewQueue(_req: Request, res: Response): void {
-    const queue = OrderModel.getQueue();
-    res.status(200).json({ queue });
-  }
+export function viewQueue(req: Request, res: Response) {
+    const queue = orders.filter(order => order.getStatus() !== "completed");
+    res.json(queue);
+}
 
-  static editOrderStatus(req: Request, res: Response): void {
+export function editOrderStatus(req: Request, res: Response) {
     const id = Number(req.params.id);
-    const { status } = req.body ?? {};
+    const status = req.body.status;
 
-    if (!VALID_STATUSES.includes(status)) {
-      res.status(400).json({ error: `status must be one of: ${VALID_STATUSES.join(", ")}` });
-      return;
+    if (status !== "queued" && status !== "preparing" && status !== "ready_for_pickup" && status !== "completed") {
+        return res.status(400).json({ error: "Invalid status" });
     }
 
-    const order = OrderModel.updateStatus(id, status);
+    const order = orders.find(order => order.getId() === id);
     if (!order) {
-      res.status(404).json({ error: `No order found with id ${id}` });
-      return;
+        return res.status(404).json({ error: "Order not found" });
     }
 
-    res.status(200).json({ order });
-  }
+    order.setStatus(status as OrderStatus);
+    res.json(order);
 }

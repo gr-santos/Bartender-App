@@ -1,0 +1,42 @@
+<main class="queue-page">
+  <a routerLink="/" class="back-link">&larr; Back to base</a>
+  <div class="header-row">
+    <h1>Order Queue</h1>
+    <button type="button" class="refresh" (click)="loadQueue()">⟳ Refresh</button>
+  </div>
+
+  @if (loading) {
+    <p class="loading">Loading queue...</p>
+  }
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+  @if (!loading && queue.length === 0) {
+    <p class="empty">No open orders right now. GG, all clear.</p>
+  }
+
+  @if (!loading) {
+    <ul class="queue-list">
+      @for (order of queue; track order.id) {
+        <li class="queue-item">
+          <div>
+            <h3>#{{ order.id }} &mdash; {{ order.cocktail.name }}</h3>
+            <p class="patron">Patron: {{ order.patronName }}</p>
+            <p class="status-row">Status: <span class="status" [class]="order.status">{{ order.status }}</span></p>
+          </div>
+          <div class="actions">
+            @if (order.status === 'queued') {
+              <button type="button" (click)="markPreparing(order)">Start Preparing</button>
+            }
+            @if (order.status === 'preparing') {
+              <button type="button" (click)="markReadyForPickup(order)">Ready for Pickup</button>
+            }
+            @if (order.status === 'ready_for_pickup') {
+              <button type="button" (click)="markCompleted(order)">Picked Up</button>
+            }
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</main>

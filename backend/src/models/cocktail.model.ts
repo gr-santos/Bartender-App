@@ -1,59 +1,46 @@
-export interface Cocktail {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  ingredients: string[];
+export class Cocktail {
+    private id: number;
+    private name: string;
+    private game: string;
+    private description: string;
+    private price: number;
+    private ingredients: string[];
+
+    constructor(id: number, name: string, game: string, description: string, price: number, ingredients: string[]) {
+        this.id = id;
+        this.name = name;
+        this.game = game;
+        this.description = description;
+        this.price = price;
+        this.ingredients = ingredients;
+    }
+
+    public getId(): number {
+        return this.id;
+    }
+    public getName(): string {
+        return this.name;
+    }
+    public getGame(): string {
+        return this.game;
+    }
+    public getDescription(): string {
+        return this.description;
+    }
+    public getPrice(): number {
+        return this.price;
+    }
+    public getIngredients(): string[] {
+        return this.ingredients;
+    }
 }
 
-/**
- * In-memory "database" of the cocktail menu.
- * Swap this for a real DB (e.g. SQLite/Postgres) without touching the controller.
- */
-const menu: Cocktail[] = [
-  {
-    id: 1,
-    name: "Mojito",
-    description: "White rum, lime, mint, sugar, soda water",
-    price: 9.5,
-    ingredients: ["White rum", "Lime", "Mint", "Sugar", "Soda water"],
-  },
-  {
-    id: 2,
-    name: "Margarita",
-    description: "Tequila, triple sec, lime juice, salted rim",
-    price: 10.0,
-    ingredients: ["Tequila", "Triple sec", "Lime juice", "Salt"],
-  },
-  {
-    id: 3,
-    name: "Old Fashioned",
-    description: "Bourbon, sugar, Angostura bitters, orange peel",
-    price: 11.0,
-    ingredients: ["Bourbon", "Sugar", "Angostura bitters", "Orange peel"],
-  },
-  {
-    id: 4,
-    name: "Cosmopolitan",
-    description: "Vodka, triple sec, cranberry juice, lime juice",
-    price: 10.5,
-    ingredients: ["Vodka", "Triple sec", "Cranberry juice", "Lime juice"],
-  },
-  {
-    id: 5,
-    name: "Pina Colada",
-    description: "White rum, coconut cream, pineapple juice",
-    price: 9.0,
-    ingredients: ["White rum", "Coconut cream", "Pineapple juice"],
-  },
+export const menu: Cocktail[] = [
+    new Cocktail(1, "Verdansk Victory Mojito", "Call of Duty: Warzone", "White rum, lime, mint, sugar, soda water", 9.5, ["White rum", "Lime", "Mint", "Sugar", "Soda water"]),
+    new Cocktail(2, "Headshot Margarita", "Valorant", "Tequila, triple sec, lime juice, salted rim", 10.0, ["Tequila", "Triple sec", "Lime juice", "Salt"]),
+    new Cocktail(3, "Elden Ring Old Fashioned", "Elden Ring", "Bourbon, sugar, Angostura bitters, orange peel", 11.0, ["Bourbon", "Sugar", "Angostura bitters", "Orange peel"]),
+    new Cocktail(4, "Night City Neon Cosmo", "Cyberpunk 2077", "Vodka, triple sec, cranberry juice, splash of blue curacao", 10.5, ["Vodka", "Triple sec", "Cranberry juice", "Blue curacao"]),
+    new Cocktail(5, "Victory Royale Colada", "Fortnite", "White rum, coconut cream, pineapple juice", 9.0, ["White rum", "Coconut cream", "Pineapple juice"]),
+    new Cocktail(6, "Creeper's Revenge", "Minecraft", "Vodka, melon liqueur, lime, soda water", 10.0, ["Vodka", "Melon liqueur", "Lime", "Soda water"]),
+    new Cocktail(7, "Arc Raiders Wasteland Mule", "Arc Raiders", "Vodka, ginger beer, lime, blackberry", 10.5, ["Vodka", "Ginger beer", "Lime", "Blackberry"]),
 ];
-
-export class CocktailModel {
-  static getMenu(): Cocktail[] {
-    return menu;
-  }
-
-  static findById(id: number): Cocktail | undefined {
-    return menu.find((c) => c.id === id);
-  }
-}

@@ -7,6 +7,4 @@ export interface Order {
   cocktail: Cocktail;
   patronName: string;
   status: OrderStatus;
-  createdAt: string;
-  updatedAt: string;
 }

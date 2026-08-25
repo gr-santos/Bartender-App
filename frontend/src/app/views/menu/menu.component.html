@@ -1,0 +1,46 @@
+<main class="menu-page">
+  <a routerLink="/" class="back-link">&larr; Back to base</a>
+  <h1>Cocktail Menu</h1>
+  <p class="subtitle">Select your loadout.</p>
+
+  @if (loading) {
+    <p class="loading">Loading menu...</p>
+  }
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  @if (!loading) {
+    <ul class="menu-list">
+      @for (cocktail of menu; track cocktail.id) {
+        <li class="menu-item">
+          <div class="menu-item-info">
+            <span class="game-tag">{{ cocktail.game }}</span>
+            <h3>{{ cocktail.name }}</h3>
+            <p class="price">${{ cocktail.price.toFixed(2) }}</p>
+            <p class="description">{{ cocktail.description }}</p>
+          </div>
+          <button type="button" (click)="selectCocktail(cocktail)">Order</button>
+        </li>
+      }
+    </ul>
+  }
+
+  @if (selectedCocktail) {
+    <div class="order-form">
+      <h2>Confirm Order: {{ selectedCocktail.name }}</h2>
+      <label>
+        Gamertag / Name
+        <input type="text" [(ngModel)]="patronName" placeholder="Guest" name="patronName" />
+      </label>
+      <div class="form-actions">
+        <button type="button" (click)="placeOrder()">Confirm Order</button>
+        <button type="button" class="secondary" (click)="selectedCocktail = null">Cancel</button>
+      </div>
+    </div>
+  }
+
+  @if (confirmationMessage) {
+    <p class="confirmation">{{ confirmationMessage }}</p>
+  }
+</main>

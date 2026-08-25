@@ -1,21 +1,17 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { inject, Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Cocktail } from '../models/cocktail.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CocktailService {
-  private readonly baseUrl = `${environment.apiUrl}/cocktails`;
+  private http = inject(HttpClient);
+  private baseUrl = `${environment.apiUrl}/cocktails`;
 
-  constructor(private http: HttpClient) {}
-
-  getMenu(): Observable<Cocktail[]> {
-    return this.http
-      .get<{ menu: Cocktail[] }>(this.baseUrl)
-      .pipe(map((res) => res.menu));
+  async getMenu(): Promise<Cocktail[]> {
+    return await firstValueFrom(this.http.get<Cocktail[]>(this.baseUrl));
   }
 }

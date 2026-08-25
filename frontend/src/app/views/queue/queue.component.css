@@ -10,13 +10,24 @@
   text-decoration: none;
 }
 
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .refresh {
-  margin-left: 1rem;
   cursor: pointer;
   padding: 0.4rem 0.9rem;
   border-radius: 6px;
-  border: 1px solid #333;
-  background: #fff;
+  border: 1px solid #00f0ff;
+  background: transparent;
+  color: #00f0ff;
+}
+
+.refresh:hover {
+  background: #00f0ff;
+  color: #041018;
 }
 
 .queue-list {
@@ -30,41 +41,64 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid #39ff14;
   border-radius: 8px;
   margin-bottom: 0.75rem;
+  background: #0d1712;
 }
 
 .queue-item h3 {
   margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.patron {
+  color: #8fd6a0;
+  margin: 0 0 0.25rem;
+  font-size: 0.9rem;
+}
+
+.status-row {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #8fd6a0;
 }
 
 .status {
-  font-weight: 600;
+  font-weight: 700;
   text-transform: capitalize;
 }
 
 .status.queued {
-  color: #b36b00;
+  color: #f4ff2e;
 }
 
 .status.preparing {
-  color: #0057b3;
+  color: #00f0ff;
 }
 
 .status.ready_for_pickup {
-  color: #0a7d2c;
+  color: #39ff14;
 }
 
 button {
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  border: 1px solid #333;
-  background: #333;
-  color: #fff;
+  border: 1px solid #39ff14;
+  background: #39ff14;
+  color: #041a08;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #7dffb3;
 }
 
 .error {
-  color: #b00020;
+  color: #ff3860;
+}
+
+.loading, .empty {
+  color: #8fd6a0;
 }
